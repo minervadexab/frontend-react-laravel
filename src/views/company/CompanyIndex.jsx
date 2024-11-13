@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link dari react-router-dom
+// import './CompanyIndex.css'; // Import custom CSS untuk animasi
 
 function CompanyIndex() {
     const [companies, setCompanies] = useState([]);
@@ -36,14 +37,16 @@ function CompanyIndex() {
     }, []);
 
     return (
-        <div className="container">
-            <h2>Company List</h2>
+        <div className="container my-5">
+            <h2 className="text-center mb-4">Company List</h2>
             {/* Tombol untuk menambah data perusahaan */}
-            <Link to="/company-index/create" className="btn btn-success mb-3">
-                Add New Company
-            </Link>
-            <table className="table">
-                <thead>
+            <div className="d-flex justify-content-end mb-3">
+                <Link to="/company-index/create" className="btn btn-success">
+                    Add New Company
+                </Link>
+            </div>
+            <table className="table table-striped table-hover">
+                <thead className="table-dark">
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
@@ -54,19 +57,19 @@ function CompanyIndex() {
                 </thead>
                 <tbody>
                     {companies.map((company) => (
-                        <tr key={company.id}>
+                        <tr key={company.id} className="company-row">
                             <td>{company.name}</td>
                             <td>{company.email}</td>
                             <td>{company.address}</td>
                             <td>{company.phone}</td>
                             <td>
                                 {/* Tombol Edit */}
-                                <Link to={`/company-index/edit/${company.id}`} className="btn btn-primary">
+                                <Link to={`/company-index/edit/${company.id}`} className="btn btn-primary btn-sm me-2">
                                     Edit
                                 </Link>
                                 {/* Tombol Delete */}
                                 <button
-                                    className="btn btn-danger"
+                                    className="btn btn-danger btn-sm"
                                     onClick={() => handleDelete(company.id)}
                                 >
                                     Delete
